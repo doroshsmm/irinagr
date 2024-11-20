@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Григоренко Ирина</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>
+        Григоренко<br />
+        Ирина
+      </h1>
+    </header>
+    <div class="container">
+    <h2><br>Информация обо мне</h2>
+    <p>
+      Я учусь в <a href="https://www.nstu.ru/">НГТУ</a>, на факультете
+      прикладной математики и информатики. Параллельно стажируюсь на должности
+      системного аналитика в команде, которая занимается разработкой мобильного
+      и web приложений.
+    </p>
+    <p>
+      Также я стараюсь уделять время своей физической форме, регулярно посещая
+      тренажерный зал. Часто провожу свободное время со своей семьей и друзьями.
+    </p>
+    <p>
+      Путешествия - еще одна моя большая страсть. Я стараюсь выбираться в
+      поездки по стране, чтобы открывать для себя новые места и традиции.
+      Помимо этого, я увлекаюсь музыкой и танцами, считаю их отличным способом
+      релаксации.
+    </p>
+    </div>
+    
+    <div class="container">
+      <h2><br>Контакты для связи</h2>
+      <p>Почта: <a href="mailto: iirinagrr@yandex.ru">iirinagrr@yandex.ru</a></p>
+      <p>Телеграм: @irinagrrr</p>
+    </div>
+
+    <div class="container">
+      <h2><br>Комментарии</h2>
+      <div id="comment-section">
+        <!-- Здесь будут отображаться комментарии -->
+      </div>
+      <h3>Добавить комментарий</h3>
+      <form id="comment-form">
+        <input type="email" id="email-input" placeholder="Введите ваш email" required />
+        <textarea id="comment-input" placeholder="Введите ваш комментарий" required></textarea>
+        <button type="submit">Отправить</button>
+      </form>
+    </div>
+
+    <footer class="site-footer">
+        <p>Страница Григоренко Ирины, 2024</p>
+    </footer>
+
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const commentSection = document.getElementById('comment-section');
+
+    // Получение комментариев с сервера
+    function loadComments() {
+      fetch('http://localhost:3000/comments')
+        .then(response => response.json())
+        .then(data => {
+          commentSection.innerHTML = '';
+          data.forEach(({ email, comment, date }) => {
+            const commentElement = document.createElement('div');
+            commentElement.textContent = `${email}: ${comment} (${new Date(date).toLocaleString()})`;
+            commentElement.style.padding = '10px';
+            commentElement.style.borderBottom = '1px solid #ccc';
+            commentSection.appendChild(commentElement);
+          });
+        })
+        .catch(error => console.error('Ошибка загрузки комментариев:', error));
+    }
+
+    document.getElementById('comment-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const commentInput = document.getElementById('comment-input');
+      const emailInput = document.getElementById('email-input');
+      const commentText = commentInput.value.trim();
+      const emailText = emailInput.value.trim();
+
+      if (commentText && emailText) {
+        fetch('http://localhost:3000/comments', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: emailText, comment: commentText }),
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Ошибка при добавлении комментария');
+          }
+          return response.json();
+        })
+        .then(() => {
+          commentInput.value = '';
+          emailInput.value = '';
+          loadComments(); // Обновляем список комментариев
+        })
+        .catch(error => console.error('Ошибка:', error));
+      } else {
+        alert("Пожалуйста, заполните оба поля: почту и комментарий.");
+      }
+    });
+
+    loadComments();
+    
+    function deleteComment(commentId) {
+  fetch(`http://localhost:3000/comments/${commentId}`, {
+    method: 'DELETE',
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.message);
+    // Обновите список комментариев на странице после удаления
+  })
+  .catch(error => console.error('Ошибка:', error));
+}
+  });
+</script>
+  </body>
+</html>

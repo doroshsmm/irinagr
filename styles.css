@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #444444;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  min-height: 100vh;
+  background-color: #f0f0f0; 
+}
+
+.container {
+  width: 100%;
+  max-width: 550px; /* Максимальная ширина контейнера */
+  padding: 0 20px;
+  box-sizing: border-box; /* Чтобы padding не увеличивал ширину */
+  background-color: #fff; /* Цвет фона контейнера */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Добавляем тень для эффекта */
+  margin-bottom: 20px; /* Отступ между контейнерами */
+  margin: 0 auto;
+}
+
+.site-header {
+  width: 100%;
+  max-width: 550px;
+  height: 186px;
+  padding-top: 30px;
+  background: #847462 no-repeat center url("https://assets.onecompiler.app/42tkwnnvu/42ttramdw/ackground.jpeg");
+  background-size: cover;
+  color: #ffffff;
+  text-align: center; /* Выравнивание текста по центру */
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 0 20px 8px;
+  font-family: "Georgia", serif;
+  font-weight: normal;
+  font-size: 45px;
+  line-height: 64px;
+  text-align: right;
+  width: auto;
+}
+
+h2 {
+  margin: 0 20px 20px;
+}
+
+p {
+  margin: 0 20px 20px;
+}
+
+.site-footer {
+  width: 100%;
+  max-width: 550px;
+  background-color: #69829B;
+  color: #ffffff;
+  padding: 10px 0;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+#comment-section {
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+#email-input,
+#comment-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #69829B;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background-color: #5a6d87;
+}
